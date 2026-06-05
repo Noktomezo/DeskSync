@@ -1,4 +1,4 @@
-### v0.1.0
+### v1.0.0
 
 - Initial implementation of the DeskSync auto-refresher daemon
 - Windowless background execution for silent operation on Windows
