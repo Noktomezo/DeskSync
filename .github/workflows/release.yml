@@ -44,7 +44,7 @@ jobs:
             1. Download `DeskSync.exe` below.
             2. Run it (runs silently in the background).
             3. To run automatically on startup, press `Win + R`, type `shell:startup`, and put a shortcut to `DeskSync.exe` there.
-          draft: false
+          draft: true
           prerelease: false
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
