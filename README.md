@@ -5,78 +5,56 @@
 <h1 align="center">DeskSync</h1>
 
 <p align="center">
-  <strong>A lightweight, zero-dependency Windows Desktop auto-refresher daemon written in Rust.</strong>
+  <strong>A tiny utility that automatically refreshes your Windows Desktop when new files appear.</strong>
 </p>
 
 <p align="center">
-  <a href="#-features">Features</a> •
   <a href="#-quick-start">Quick Start</a> •
-  <a href="#-how-it-works">How It Works</a> •
-  <a href="#-development">Development</a>
+  <a href="#-features">Features</a> •
+  <a href="#-how-to-stop">How to Stop</a>
 </p>
 
 ---
 
 ## 📌 The Problem
 
-On Windows (including Windows 10 and 11), saving files, downloading documents, or dragging items onto the Desktop directory often doesn't trigger a visual refresh immediately. You are forced to manually click the Desktop and press `F5` to see your files.
+On Windows (including Windows 10 and 11), when you save a file, download a document, or drag something onto your Desktop, the icons often do not appear immediately. You have to manually click the Desktop and press `F5` to refresh it.
 
-**DeskSync** solves this by running silently in the background, monitoring your Desktop directory for any file system events (additions, deletions, renames), and programmatically notifying the Windows Shell to refresh the view instantly.
-
----
-
-## ✨ Features
-
-- **⚡ Lightweight & Fast**: Built in Rust with optimized release settings and UPX compression. The final executable is only **~156 KB**.
-- **🔇 Zero-Window Daemon**: Compiles with `#![windows_subsystem = "windows"]` in release mode, meaning it runs completely silently in the background without any console windows.
-- **🧠 Intelligent Debouncing**: Monitors changes using the `notify` crate, but waits for a brief `500ms` silence window before refreshing to avoid repetitive refreshes during large file writes or downloads.
-- **🔌 Native Win32 Integration**: Uses pure, zero-overhead FFI to hook into `SHChangeNotify(SHCNE_UPDATEDIR, ...)` and `SHGetSpecialFolderPathW` to locate your Desktop even if it has been relocated (e.g. to OneDrive).
+**DeskSync** runs silently in the background, watches your Desktop, and automatically refreshes the screen the instant any files are added, renamed, or deleted.
 
 ---
 
 ## ⚡ Quick Start
 
-### 📥 Download
-1. Go to the [Releases](https://github.com/Noktomezo/DeskSync/releases) page.
-2. Download the latest compiled `DeskSync.exe` executable.
+### 📥 1. Download
+Go to the [Releases](https://github.com/Noktomezo/DeskSync/releases) page and download the latest `DeskSync.exe` file.
 
-### 🏃 Running
-Double-click `DeskSync.exe`. It will immediately start monitoring in the background (no window will appear). You can verify it is running in your **Task Manager** under the process name `DeskSync.exe`.
+### 🏃 2. Run
+Double-click the downloaded `DeskSync.exe` file. It runs completely silently in the background—no windows, terminal prompts, or system tray icons will appear.
 
-### ⚙️ Autostart on Windows Login
-To ensure DeskSync runs every time you log in:
-1. Press `Win + R`, type `shell:startup` and hit **Enter** (this opens your Startup folder).
+### ⚙️ 3. Start Automatically with Windows (Optional)
+If you want DeskSync to start automatically every time you turn on your PC:
+1. Press `Win + R` on your keyboard, type `shell:startup` and press **Enter** (this opens your Windows Startup folder).
 2. Right-click inside the folder, select **New -> Shortcut**.
-3. Browse to the downloaded `DeskSync.exe` file and click **Finish**.
+3. Browse to the downloaded `DeskSync.exe` file, select it, and click **Finish**.
 
 ---
 
-## 🔍 How It Works
+## ✨ Features
 
-Instead of simulating keyboard input or sending violent global updates that reset all Explorer windows, DeskSync calls:
-```rust
-SHChangeNotify(SHCNE_UPDATEDIR, SHCNF_PATHW, desktop_path, null)
-```
-This targeting tells Windows Explorer that *only* the Desktop folder needs updating, making the refresh smooth and completely imperceptible.
+- 🚀 **Completely Invisible**: Runs silently in the background without cluttering your screen, taskbar, or system tray.
+- ⚡ **Zero Resource Usage**: Built to be extremely lightweight; uses virtually 0% CPU and a negligible amount of RAM.
+- 🧠 **Smart Updates**: Intelligently waits for files to finish downloading or copying before refreshing, avoiding screen flickering.
+- 📁 **OneDrive Compatible**: Works perfectly even if your Desktop folder is synced to OneDrive or moved to another drive.
 
 ---
 
-## 🛠️ Development
+## 🛑 How to Stop
 
-### 🛠️ Building
-You can easily build the project using the [just](https://github.com/casey/just) command runner:
-
-```bash
-# Build release-optimized binary with UPX compression
-just release
-```
-This compiles the pure-Rust resource compiler (`build.rs`), rasterizes `assets/sync.svg` into a multi-resolution `.ico` icon, embeds it, and packs the executable to `target/release/DeskSync.exe`.
-
-### 🧪 Local Debugging
-```bash
-# Run in debug mode (with active console logs)
-cargo run
-```
+If you ever need to close the utility:
+1. Open the Windows **Task Manager** (press `Ctrl + Shift + Esc`).
+2. Look for **DeskSync** (or `DeskSync.exe`) in the list of background processes.
+3. Select it and click **End Task**.
 
 ---
 
