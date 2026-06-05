@@ -2,7 +2,7 @@
   <img src="assets/sync.svg" alt="DeskSync Logo" width="120" height="120" />
 </p>
 
-<h1 align="center">🔃 DeskSync</h1>
+<h1 align="center">DeskSync</h1>
 
 <p align="center">
   <strong>A lightweight, zero-dependency Windows Desktop auto-refresher daemon written in Rust.</strong>
