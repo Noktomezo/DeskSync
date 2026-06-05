@@ -22,10 +22,13 @@ On Windows (including Windows 10 and 11), when you save a file, download a docum
 
 ## ✨ Features
 
-- 👻 **Completely Invisible**: Runs silently in the background without cluttering your screen, taskbar, or system tray.
-- 🪶 **Zero Resource Usage**: Built to be extremely lightweight; uses virtually 0% CPU and a negligible amount of RAM.
-- 🧠 **Smart Updates**: Intelligently waits for files to finish downloading or copying before refreshing, avoiding screen flickering.
-- 📁 **OneDrive Compatible**: Works perfectly even if your Desktop folder is synced to OneDrive or moved to another drive.
+👻 **Completely Invisible**: Runs silently in the background without cluttering your screen, taskbar, or system tray.
+
+🪶 **Zero Resource Usage**: Built to be extremely lightweight; uses virtually 0% CPU and a negligible amount of RAM.
+
+🧠 **Smart Updates**: Intelligently waits for files to finish downloading or copying before refreshing, avoiding screen flickering.
+
+📁 **OneDrive Compatible**: Works perfectly even if your Desktop folder is synced to OneDrive or moved to another drive.
 
 ## 🚀 Quick Start
 
