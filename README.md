@@ -9,7 +9,6 @@
 </p>
 
 <p align="center">
-  <a href="#-features">Features</a> •
   <a href="#-quick-start">Quick Start</a> •
   <a href="#-how-to-stop">How to Stop</a>
 </p>
