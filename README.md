@@ -64,8 +64,7 @@ SHChangeNotify(SHCNE_UPDATEDIR, SHCNF_PATHW, desktop_path, null)
 ```
 This targeting tells Windows Explorer that *only* the Desktop folder needs updating, making the refresh smooth and completely imperceptible.
 
----
-
-<p align="center">
-  <img src="assets/heartbeat.svg" alt="Heartbeat" width="64" height="64" />
-</p>
+<div align="center">
+  <img src="./assets/heartbeat.svg" alt="heartbeat" width="600px">
+  <p>Made with 💜. Published under <a href="LICENSE">MIT License</a>.</p>
+</div>
