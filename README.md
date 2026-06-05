@@ -14,15 +14,11 @@
   <a href="#-how-to-stop">How to Stop</a>
 </p>
 
----
-
 ## 📌 The Problem
 
 On Windows (including Windows 10 and 11), when you save a file, download a document, or drag something onto your Desktop, the icons often do not appear immediately. You have to manually click the Desktop and press `F5` to refresh it.
 
 **DeskSync** runs silently in the background, watches your Desktop, and automatically refreshes the screen the instant any files are added, renamed, or deleted.
-
----
 
 ## ⚡ Quick Start
 
@@ -38,8 +34,6 @@ If you want DeskSync to start automatically every time you turn on your PC:
 2. Right-click inside the folder, select **New -> Shortcut**.
 3. Browse to the downloaded `DeskSync.exe` file, select it, and click **Finish**.
 
----
-
 ## ✨ Features
 
 - 🚀 **Completely Invisible**: Runs silently in the background without cluttering your screen, taskbar, or system tray.
@@ -47,16 +41,12 @@ If you want DeskSync to start automatically every time you turn on your PC:
 - 🧠 **Smart Updates**: Intelligently waits for files to finish downloading or copying before refreshing, avoiding screen flickering.
 - 📁 **OneDrive Compatible**: Works perfectly even if your Desktop folder is synced to OneDrive or moved to another drive.
 
----
-
 ## 🛑 How to Stop
 
 If you ever need to close the utility:
 1. Open the Windows **Task Manager** (press `Ctrl + Shift + Esc`).
 2. Look for **DeskSync** (or `DeskSync.exe`) in the list of background processes.
 3. Select it and click **End Task**.
-
----
 
 <div align="center">
   <img src="./assets/heartbeat.svg" alt="heartbeat" width="600px">
