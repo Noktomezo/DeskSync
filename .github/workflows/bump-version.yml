@@ -1,0 +1,90 @@
+name: Bump Version
+on:
+  workflow_dispatch:
+    inputs:
+      bump_type:
+        description: Type of version bump
+        required: true
+        default: patch
+        type: choice
+        options:
+          - patch
+          - minor
+          - major
+
+jobs:
+  bump:
+    runs-on: windows-latest
+    permissions:
+      contents: write
+      pull-requests: write
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          token: ${{ secrets.RELEASE_TOKEN }}
+          persist-credentials: false
+
+      - name: Git Config
+        run: |
+          git config --global user.name "github-actions[bot]"
+          git config --global user.email "github-actions[bot]@users.noreply.github.com"
+
+      - name: Bump Cargo.toml version
+        shell: bash
+        env:
+          BUMP_TYPE: ${{ github.event.inputs.bump_type }}
+        run: |
+          CURRENT_VERSION=$(grep -m1 '^version = ' Cargo.toml | cut -d '"' -f2)
+
+          case "$BUMP_TYPE" in
+            major)
+              NEW_VERSION=$(echo "$CURRENT_VERSION" | awk -F. '{print $1+1".0.0"}')
+              ;;
+            minor)
+              NEW_VERSION=$(echo "$CURRENT_VERSION" | awk -F. '{print $1"."$2+1".0"}')
+              ;;
+            patch|*)
+              NEW_VERSION=$(echo "$CURRENT_VERSION" | awk -F. '{print $1"."$2"."$3+1}')
+              ;;
+          esac
+
+          sed -i "s/^version = \".*\"/version = \"$NEW_VERSION\"/" Cargo.toml
+
+          echo "NEW_VERSION=$NEW_VERSION" >> $GITHUB_ENV
+          echo "✅ Version bumped: $CURRENT_VERSION → $NEW_VERSION"
+
+      - name: Install Rust
+        uses: dtolnay/rust-toolchain@stable
+
+      - name: Regenerate Cargo.lock
+        run: cargo generate-lockfile
+
+      - name: Create Pull Request
+        id: cpr
+        uses: peter-evans/create-pull-request@v7
+        with:
+          token: ${{ secrets.RELEASE_TOKEN }}
+          commit-message: 'chore: bump version to v${{ env.NEW_VERSION }}'
+          committer: 'github-actions[bot] <github-actions[bot]@users.noreply.github.com>'
+          author: 'github-actions[bot] <github-actions[bot]@users.noreply.github.com>'
+          branch: 'chore/version-bump-v${{ env.NEW_VERSION }}'
+          title: 'chore: bump version to v${{ env.NEW_VERSION }}'
+          body: |
+            Bumping version to v${{ env.NEW_VERSION }}
+            - Bump type: ${{ github.event.inputs.bump_type }}
+            - Updated: `Cargo.toml`, `Cargo.lock`
+          labels: |
+            version-bump
+            automated-pr
+
+      - name: Create and Push Tag
+        if: steps.cpr.outputs.pull-request-number != ''
+        shell: bash
+        env:
+          GITHUB_TOKEN: ${{ secrets.RELEASE_TOKEN }}
+        run: |
+          git config --local http.https://github.com/.extraheader "AUTHORIZATION: basic $(echo -n x-access-token:${GITHUB_TOKEN} | base64)"
+
+          git tag -f "v${{ env.NEW_VERSION }}" ${{ steps.cpr.outputs.pull-request-head-sha }}
+          git push origin "v${{ env.NEW_VERSION }}" --force

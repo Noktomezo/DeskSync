@@ -1,0 +1,48 @@
+name: Release CI
+
+on:
+  push:
+    tags:
+      - 'v*'
+
+jobs:
+  publish:
+    permissions:
+      contents: write
+    runs-on: windows-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Install Rust
+        uses: dtolnay/rust-toolchain@stable
+
+      - name: Rust Cache
+        uses: swatinem/rust-cache@v2
+
+      - name: Install Just
+        uses: taiki-e/install-action@just
+
+      - name: Install UPX
+        uses: taiki-e/install-action@upx
+
+      - name: Build and Compress Release
+        run: just release
+
+      - name: Create GitHub Release
+        uses: softprops/action-gh-release@v2
+        with:
+          files: target/release/DeskSync.exe
+          name: DeskSync ${{ github.ref_name }}
+          body: |
+            🚀 **DeskSync Release ${{ github.ref_name }}**
+            
+            Lightweight, auto-refresher background service for Windows Desktop.
+            
+            ### Installation:
+            1. Download `DeskSync.exe` below.
+            2. Run it (runs silently in the background).
+            3. To run automatically on startup, press `Win + R`, type `shell:startup`, and put a shortcut to `DeskSync.exe` there.
+          draft: false
+          prerelease: false
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
