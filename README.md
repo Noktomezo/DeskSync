@@ -22,17 +22,9 @@ On Windows (including Windows 10 and 11), when you save a file, download a docum
 
 ## ⚡ Quick Start
 
-### 📥 1. Download
-Go to the [Releases](https://github.com/Noktomezo/DeskSync/releases) page and download the latest `DeskSync.exe` file.
-
-### 🏃 2. Run
-Double-click the downloaded `DeskSync.exe` file. It runs completely silently in the background—no windows, terminal prompts, or system tray icons will appear.
-
-### ⚙️ 3. Start Automatically with Windows (Optional)
-If you want DeskSync to start automatically every time you turn on your PC:
-1. Press `Win + R` on your keyboard, type `shell:startup` and press **Enter** (this opens your Windows Startup folder).
-2. Right-click inside the folder, select **New -> Shortcut**.
-3. Browse to the downloaded `DeskSync.exe` file, select it, and click **Finish**.
+1. **Download**: Get `DeskSync.exe` from [Releases](https://github.com/Noktomezo/DeskSync/releases).
+2. **Run**: Double-click the file. It runs silently in the background (visible only in Task Manager).
+3. **Autostart**: Press `Win + R`, type `shell:startup`, and place a shortcut to `DeskSync.exe` there to run it on startup.
 
 ## ✨ Features
 
