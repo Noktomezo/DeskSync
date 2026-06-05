@@ -1,17 +1,18 @@
-<p align="center">
-  <img src="assets/sync.svg" alt="DeskSync Logo" width="120" height="120" />
-</p>
-
-<h1 align="center">DeskSync</h1>
-
-<p align="center">
-  <strong>A tiny utility that automatically refreshes your Windows Desktop when new files appear.</strong>
-</p>
-
-<p align="center">
-  <a href="#-quick-start">Quick Start</a> •
-  <a href="#-how-to-stop">How to Stop</a>
-</p>
+<table>
+  <tr>
+    <td width="130" align="center" valign="middle">
+      <img src="assets/sync.svg" alt="DeskSync Logo" width="120" height="120" />
+    </td>
+    <td valign="middle">
+      <h1>DeskSync</h1>
+      <p><strong>A tiny utility that automatically refreshes your Windows Desktop when new files appear.</strong></p>
+      <p>
+        <a href="#-quick-start">Quick Start</a> • 
+        <a href="#-how-to-stop">How to Stop</a>
+      </p>
+    </td>
+  </tr>
+</table>
 
 ## 📌 The Problem
 
