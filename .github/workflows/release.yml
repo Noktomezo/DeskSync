@@ -19,10 +19,13 @@ jobs:
       - name: Rust Cache
         uses: swatinem/rust-cache@v2
 
-      - name: Install Just and UPX
-        uses: taiki-e/install-action@v2
+      - name: Install Just
+        uses: taiki-e/install-action@just
+
+      - name: Install UPX
+        uses: crazy-max/ghaction-upx@v4
         with:
-          tool: just,upx
+          install-only: true
 
       - name: Build and Compress Release
         run: just release
